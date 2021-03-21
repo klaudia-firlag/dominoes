@@ -31,10 +31,10 @@ class TestDominoes(unittest.TestCase):
         with self.assertRaises(Exception):
             self.dominoes.backward(in_string, num_iter)
 
-    def test_forward_1iteration(self):
-        in_string = r'||//||\||/\|'
-        expected_output = r'||///\\||/\|'
-        num_iter = 1
+    def test_forward_2iterations(self):
+        in_string = '||/||||\\|/\\|'
+        expected_output = '||///\\\\\\|/\\|'
+        num_iter = 2
 
         result = self.dominoes.forward(in_string, num_iter)
 
@@ -42,8 +42,8 @@ class TestDominoes(unittest.TestCase):
         self.assertEqual(result, expected_output)
 
     def test_backward_2iterations(self):
-        in_string = r'||////\\\|////|'
-        expected_output = r'||//||||\|//|||'
+        in_string = '||////\\\\\\|////|'
+        expected_output = '||//||||\\|//|||'
         num_iter = 2
 
         result = self.dominoes.backward(in_string, num_iter)
