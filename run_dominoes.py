@@ -39,12 +39,21 @@ class Dominoes:
 
         return out_str
 
-    @staticmethod
-    def backward(in_string: str, num_iter: int = 1) -> str:
-        if num_iter == 0:
-            return in_string
+    def backward(self, in_string: str, num_iter: int = 1) -> str:
+        self.assert_inputs_correct(in_string, num_iter)
+        out_str = in_string
 
-        return in_string
+        for _ in range(num_iter):
+            patterns = [r'/\\', r'/\|', r'\|\\']
+
+            for pattern in patterns:
+                for found_pattern in re.finditer(pattern, in_string):
+                    pattern_idx = found_pattern.regs[0][0]
+                    out_str = out_str[:pattern_idx] + '||' + out_str[pattern_idx + 2:]
+
+            in_string = out_str
+
+        return out_str
 
 
 if __name__ == '__main__':
@@ -63,7 +72,6 @@ if __name__ == '__main__':
     else:
         result = dominoes.forward(args.in_sequence, args.num_iter)
 
-    print('success')
     print(f'Results after {args.num_iter} iterations:\n'
           f'\tInput string:  {args.in_sequence}\n'
           f'\tOutput string: {result}')
