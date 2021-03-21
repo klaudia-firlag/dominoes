@@ -4,8 +4,8 @@ from run_dominoes import Dominoes
 
 class TestDominoes(unittest.TestCase):
 
-    def __init__(self):
-        super().__init__()
+    def __init__(self, *args, **kwargs):
+        super(TestDominoes, self).__init__(*args, **kwargs)
         self.dominoes = Dominoes()
 
     def test_input_empty(self):
